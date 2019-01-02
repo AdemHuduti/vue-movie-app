@@ -1,0 +1,63 @@
+<template>
+  <div>
+    <side-menu></side-menu>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="container">
+          <h3 class="text-center mt-5">Now Playing Movies</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div
+        v-match-heights="{ el: ['.c']}"
+        v-for="(movie, index) in onTvMovies"
+        :key="index"
+        class="col-sm-6 col-md-3 mt-5"
+      >
+        <div class="ml-4 parent">
+          <div class="c">
+            <router-link :to="{ path: '/movies/' + movie.id }">
+              <img
+                :src="`https://image.tmdb.org/t/p/w300/${movie.poster_path}`"
+                class="card-img-top"
+                alt="imgz"
+              >
+            </router-link>
+            <h5 class="mb-3 mt-3">{{ movie.title }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import SideMenu from "../components/SideMenu";
+import { mapState } from "vuex";
+
+export default {
+  components: {
+    SideMenu
+  },
+  computed: {
+    ...mapState(["onTvMovies"])
+  },
+  created() {
+    this.$store.dispatch("getOnTvMovies");
+  }
+};
+</script>
+
+<style scoped>
+img {
+  border: 1px solid #FFC600;
+  transition: .3s cubic-bezier(.5, 0, .1, 1) transform;
+	transition-delay: .15s;
+}
+
+img:hover {
+  transform: scale(1.4);
+  border: none;
+}
+</style>
