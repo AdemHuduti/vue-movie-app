@@ -1,4 +1,4 @@
-# movie-app
+# Movie application with Vue.js and Vuex
 
 ## Project setup
 ```
