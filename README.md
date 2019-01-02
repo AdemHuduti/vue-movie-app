@@ -23,12 +23,12 @@ npm run build
 
 ## Project setup
 ```
-yarn install
+yarn install or npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-yarn run serve
+yarn run serve or npm run serve
 ```
 
 ### Compiles and minifies for production
