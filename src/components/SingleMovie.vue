@@ -6,27 +6,27 @@
 
     <div class="row mt-5">
       <div class="col-md-4 text-center">
-        <div v-for="(item, index) in info" :key="index" class="bor-yellow" >
+        <div class="bor-yellow" >
           <!-- <div class="bgi" :style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w300/' + item.backdrop_path + ')' }"></div> -->
-          <h1>{{item.title}}</h1>
-          <p>{{item.overview}}</p>
+          <h1>{{info.title}}</h1>
+          <p>{{info.overview}}</p>
           
         </div>
       </div>
 
       <div class="col-md-4">
-        <div v-for="(item, index) in info" :key="index">
+        <div>
           <div class="text-center">
-            <img :src="`https://image.tmdb.org/t/p/w300/${item.poster_path}`" alt class="img-fluid">
+            <img :src="`https://image.tmdb.org/t/p/w300/${info.poster_path}`" alt class="img-fluid">
           </div>
         </div>
       </div>
 
       <div class="col-md-4 text-center">
         <h2 class="mb-5">Genres:</h2>
-        <span v-for="(item, index) in info" :key="index">
-          <span class="genres" v-for="(p, index) in item.genres" :key="index">{{p.name}}</span>
-          <p class="vote">{{item.vote_average}}</p>
+        <span>
+          <span class="genres" v-for="(p, index) in info.genres" :key="index">{{p.name}}</span>
+          <p class="vote">{{info.vote_average}}</p>
         </span>
       </div>
     </div>
@@ -111,7 +111,9 @@ export default {
 
       axios
         .get(URL)
-        .then(res => (this.info = res))
+        .then(res => {
+          this.info = res.data;
+        })
     },
     similarMovies() {
       const API_KEY = "b6ae17c5481c2abdc5c03bc07d7186e7";
