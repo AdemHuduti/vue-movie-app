@@ -4,30 +4,26 @@
       <i class="fas fa-backward fa-3x"></i>
       </router-link>
 
-    <div class="row mt-5">
+    <div class="row mt-5 bgi img-fluid" :style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w300/' + info.backdrop_path + ')' }">
       <div class="col-md-4 text-center">
-        <div v-for="(item, index) in info" :key="index" class="bor-yellow">
-          <!-- <div class="bgi" :style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w300/' + item.backdrop_path + ')' }"></div> -->
-          <h1>{{item.name}}</h1>
-          <p>{{item.overview}}</p>
-          
+        <div class="bor-yellow">
+          <h1>{{info.name}}</h1>
+          <p>{{info.overview}}</p>
         </div>
       </div>
 
       <div class="col-md-4">
-        <div v-for="(item, index) in info" :key="index">
+        <div>
           <div class="text-center">
-            <img :src="`https://image.tmdb.org/t/p/w300/${item.poster_path}`" alt class="img-fluid">
+            <img :src="`https://image.tmdb.org/t/p/w300/${info.poster_path}`" alt class="img-fluid">
           </div>
         </div>
       </div>
 
       <div class="col-md-4 text-center">
         <h2 class="mb-5">Genres:</h2>
-        <span v-for="(item, index) in info" :key="index">
-          <span class="genres" v-for="(p, index) in item.genres" :key="index">{{p.name}}</span>
-          <p class="vote">{{item.vote_average}}</p>
-        </span>
+        <span class="genres" v-for="(p, index) in info.genres" :key="index">{{p.name}}</span>
+        <p class="vote">{{info.vote_average}}</p>
       </div>
     </div>
 
@@ -112,7 +108,7 @@ export default {
       }?api_key=${API_KEY}&language=en-US&page=1`;
 
       axios.get(URL)
-        .then(res => (this.info = res))
+        .then(res => (this.info = res.data))
     },
     getRecommendationsTvShows() {
       const API_KEY = "b6ae17c5481c2abdc5c03bc07d7186e7";
@@ -142,6 +138,15 @@ i {
   color: #fff;
 }
 
+.bgi {
+  background-repeat: no-repeat;
+  background-size:  cover;
+}
+
+img {
+  opacity: .9;
+}
+
 .vote {
   background-color: #fff000;
   text-align: center;
@@ -169,7 +174,6 @@ i {
 
 @media only screen and (max-width: 992px) {
   .genres {
-    
     padding: 10px;
     margin-bottom: 8px;
     text-align: center;
