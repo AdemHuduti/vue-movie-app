@@ -3,8 +3,8 @@
     <router-link to="/TopRatedTvShows">
       <i class="fas fa-backward fa-3x"></i>
       </router-link>
-
-    <div class="row mt-5 bgi img-fluid" :style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w300/' + info.backdrop_path + ')' }">
+<!-- :style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w300/' + info.backdrop_path + ')' }" -->
+    <div class="row mt-5 bgi img-fluid">
       <div class="col-md-4 text-center">
         <div class="bor-yellow">
           <h1>{{info.name}}</h1>
