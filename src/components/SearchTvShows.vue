@@ -5,12 +5,18 @@
 
     <form @submit.prevent>
       <div class="d-flex justify-content-center mt-5">
-        <input type="text" v-model="searchName" class="form_field" placeholder="Search tv shows.." required>
+        <input
+          type="text"
+          v-model="searchName"
+          class="form_field"
+          placeholder="Search tv shows.."
+          required
+        >
         <button @click="searchMovie" class="form__button">Search</button>
       </div>
     </form>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" v-if="searchTvShows.length">
       <div
         v-match-heights="{ el: ['.c']}"
         v-for="(show, index) in searchTvShows"
@@ -32,11 +38,35 @@
       </div>
     </div>
 
+    <div class="row justify-content-center" v-else>
+      <div
+        v-match-heights="{ el: ['.c']}"
+        v-for="(show, index) in apiData"
+        :key="index"
+        class="col-sm-6 col-md-3 mt-5"
+      >
+        <div class="cad ml-4 parent">
+          <h6 class="text-center">Your last search was:
+            <span class="yell">{{show.name}}</span>
+          </h6>
+          <div class="card">
+            <router-link :to="{ path: '/shows/' + show.id }">
+              <img
+                :src="`https://image.tmdb.org/t/p/w300${show.poster_path}`"
+                class="card-img-top"
+                alt="imgz"
+              >
+            </router-link>
+            <h6 class="mb-3 mt-3">{{ show.name }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 import SideMenu from "../components/SideMenu";
 
 export default {
@@ -45,36 +75,44 @@ export default {
   },
   data() {
     return {
-      searchName: '',
-      searchTvShows: []
-    }
+      searchName: "",
+      searchTvShows: [],
+      apiData: []
+    };
   },
   methods: {
     searchMovie() {
-      const API_KEY = 'b6ae17c5481c2abdc5c03bc07d7186e7';
-      const TV =     `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&language=en-US&query=${this.searchName}&include_adult=false`
-
-      axios.get(TV)
-
-        .then(res => {
-          const findTvShows = res.data.results;
-          this.searchTvShows = findTvShows.slice(0, 1);
-        })
+      const API_KEY = "b6ae17c5481c2abdc5c03bc07d7186e7";
+      const TV = `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&language=en-US&query=${
+        this.searchName
+      }&include_adult=false`;
+      axios.get(TV).then(res => {
+        const findTvShows = res.data.results.slice(0, 1);
+        this.searchTvShows = findTvShows;
+        localStorage.setItem("TV", JSON.stringify(findTvShows));
+      });
     }
+  },
+  mounted() {
+    let tvData = JSON.parse(localStorage.getItem("TV"));
+    this.apiData = tvData;
   }
-}
+};
 </script>
 
 <style scoped>
+.yell {
+  color: #ffc600;
+}
 
 .card {
   background: transparent;
 }
 
 img {
-  border: 1px solid #FFC600;
-  transition: .3s cubic-bezier(.5, 0, .1, 1) transform;
-	transition-delay: .15s;
+  border: 1px solid #ffc600;
+  transition: 0.3s cubic-bezier(0.5, 0, 0.1, 1) transform;
+  transition-delay: 0.15s;
 }
 
 img:hover {
@@ -93,12 +131,11 @@ img:hover {
   padding: 0.4rem;
 }
 
-input[type="text"] { 
+input[type="text"] {
   outline: none;
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px #f3f3f3 inset;
   -webkit-text-fill-color: #2c3e50 !important;
 }
 
