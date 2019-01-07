@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Main from './components/Main';
+import SearchMovie from './components/SearchMovie';
+import SearchTvShows from './components/SearchTvShows';
 import TopRatedMovies from './movies/TopRatedMovies';
 import PopularMovies from './movies/PopularMovies';
 import UpcomingMovies from './movies/UpcomingMovies';
@@ -61,6 +63,16 @@ export default new Router({
       path: "/AiringToday",
       name: "AiringToday",
       component: AiringToday
+    },
+    {
+      path: "/SearchMovie",
+      name: "SearchMovie",
+      component: SearchMovie
+    },
+    {
+      path: "/SearchTvShows",
+      name: "SearchTvShows",
+      component: SearchTvShows
     },
     {
       path: "/movies/:id",

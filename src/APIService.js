@@ -3,7 +3,7 @@ import axios from 'axios';
 // Api key
 const API_KEY = 'b6ae17c5481c2abdc5c03bc07d7186e7';
 const MOVIE_URL = 'https://api.themoviedb.org/3/movie/';
-const TV_SHOW_URL = 'https://api.themoviedb.org/3/tv/'
+const TV_SHOW_URL = 'https://api.themoviedb.org/3/tv/';
 
 // Top rated movies
 const URL = `${MOVIE_URL}top_rated?api_key=${API_KEY}&language=en-US&page=1`

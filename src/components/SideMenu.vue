@@ -58,6 +58,16 @@
               <li>TV Shows Airing Today</li>
             </router-link>
           </ul>
+          <router-link to="/SearchMovie" class="linkList">
+            <li>
+              <i class="fas fa-search mr-2 ml-2"></i> <span class="title">Search Movie</span>
+            </li>
+          </router-link>
+          <router-link to="/SearchTvShows" class="linkList">
+            <li>
+              <i class="fas fa-search mr-2 ml-2"></i> <span class="title">Search Tv Shows</span>
+            </li>
+          </router-link>
         </ul>
       </div>
     </div>
@@ -69,6 +79,12 @@ export default {};
 </script>
 
 <style scoped>
+
+.linkList {
+  color: #fff;
+  text-decoration: none;
+}
+
 
 .title {
   font-size: 1rem;
