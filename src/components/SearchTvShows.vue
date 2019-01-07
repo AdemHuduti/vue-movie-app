@@ -1,0 +1,122 @@
+<template>
+  <div>
+    <side-menu></side-menu>
+    <h1 class="text-center">Search</h1>
+
+    <form @submit.prevent>
+      <div class="d-flex justify-content-center mt-5">
+        <input type="text" v-model="searchName" class="form_field" placeholder="Search tv shows.." required>
+        <button @click="searchMovie" class="form__button">Search</button>
+      </div>
+    </form>
+
+    <div class="row justify-content-center">
+      <div
+        v-match-heights="{ el: ['.c']}"
+        v-for="(show, index) in searchTvShows"
+        :key="index"
+        class="col-sm-6 col-md-3 mt-5"
+      >
+        <div class="cad ml-4 parent">
+          <div class="card">
+            <router-link :to="{ path: '/shows/' + show.id }">
+              <img
+                :src="`https://image.tmdb.org/t/p/w300${show.poster_path}`"
+                class="card-img-top"
+                alt="imgz"
+              >
+            </router-link>
+            <h6 class="mb-3 mt-3">{{ show.name }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import SideMenu from "../components/SideMenu";
+
+export default {
+  components: {
+    SideMenu
+  },
+  data() {
+    return {
+      searchName: '',
+      searchTvShows: []
+    }
+  },
+  methods: {
+    searchMovie() {
+      const API_KEY = 'b6ae17c5481c2abdc5c03bc07d7186e7';
+      const TV =     `https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&language=en-US&query=${this.searchName}&include_adult=false`
+
+      axios.get(TV)
+
+        .then(res => {
+          const findTvShows = res.data.results;
+          this.searchTvShows = findTvShows.slice(0, 1);
+        })
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+.card {
+  background: transparent;
+}
+
+img {
+  border: 1px solid #FFC600;
+  transition: .3s cubic-bezier(.5, 0, .1, 1) transform;
+	transition-delay: .15s;
+}
+
+img:hover {
+  transform: scale(1.4);
+  border: none;
+}
+
+.form_field {
+  background: transparent;
+  color: #fff;
+  border: 0;
+  border-bottom: solid 2px #fff000;
+  margin-right: 10px;
+  letter-spacing: 2px;
+  width: 20%;
+  padding: 0.4rem;
+}
+
+input[type="text"] { 
+  outline: none;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #f3f3f3 inset;
+  -webkit-text-fill-color: #2c3e50 !important;
+}
+
+.form__button {
+  border: solid 2px #fff000;
+  color: #fff;
+  background: transparent;
+  padding: 0.2rem 0.9rem;
+  margin: 0 0.2rem;
+  border-radius: 1px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-left: 0.7rem;
+  cursor: pointer;
+}
+
+.form__button:focus {
+  outline: none;
+}
+</style>

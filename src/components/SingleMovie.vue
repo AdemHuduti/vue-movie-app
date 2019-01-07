@@ -34,7 +34,7 @@
     <h1 v-if="recommendations.length">Recommended movies</h1>
     <div class="row" v-if="recommendations.length">
       <div 
-        v-match-heights="{ el: ['.rec_title']}" 
+        v-match-heights="{ el: ['.card']}" 
         v-for="(rec, index) in recommendations" :key="index" 
         class="col-sm-6 col-md-4 mt-5 mb-4"
       >
