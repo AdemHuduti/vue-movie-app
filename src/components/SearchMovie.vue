@@ -5,15 +5,21 @@
 
     <form @submit.prevent>
       <div class="d-flex justify-content-center mt-5">
-        <input type="text" v-model="searchName" class="form_field" placeholder="Search movie.." required>
+        <input
+          type="text"
+          v-model="searchName"
+          class="form_field"
+          placeholder="Search movie.."
+          required
+        >
         <button @click="searchMovie" class="form__button">Search</button>
       </div>
       <!-- <p class="text-center" v-if="searchName.length >= 3">traal</p> -->
     </form>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" v-if="searchedMovie.length">
       <div
-        v-match-heights="{ el: ['.c']}"
+        v-match-heights="{ el: ['.card']}"
         v-for="(movie, index) in searchedMovie"
         :key="index"
         class="col-sm-6 col-md-3 mt-5"
@@ -33,11 +39,35 @@
       </div>
     </div>
 
+    <div class="row justify-content-center" v-else>
+      <div
+        v-match-heights="{ el: ['.card']}"
+        v-for="(movie, index) in apiData"
+        :key="index"
+        class="col-sm-6 col-md-3 mt-5"
+      >
+        <div class="cad ml-4 parent">
+          <h6 class="text-center">Your last search was:
+            <span class="yell">{{movie.title}}</span>
+          </h6>
+          <div class="card">
+            <router-link :to="{ path: '/movies/' + movie.id }">
+              <img
+                :src="`https://image.tmdb.org/t/p/w300${movie.poster_path}`"
+                class="card-img-top"
+                alt="imgz"
+              >
+            </router-link>
+            <h6 class="mb-3 mt-3">{{ movie.title }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 import SideMenu from "../components/SideMenu";
 
 export default {
@@ -46,35 +76,45 @@ export default {
   },
   data() {
     return {
-      searchName: '',
-      searchedMovie: []
-    }
+      searchName: "",
+      searchedMovie: [],
+      apiData: []
+    };
   },
   methods: {
     searchMovie() {
-      const API_KEY = 'b6ae17c5481c2abdc5c03bc07d7186e7';
-      const SEARCH = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${this.searchName}&include_adult=false`;
+      const API_KEY = "b6ae17c5481c2abdc5c03bc07d7186e7";
+      const SEARCH = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${
+        this.searchName
+      }&include_adult=false`;
 
-      axios.get(SEARCH)
-        .then(res => {
-          const findMovie = res.data.results;
-          this.searchedMovie = findMovie.slice(0, 1);
-        })
+      axios.get(SEARCH).then(res => {
+        const findMovie = res.data.results.slice(0, 1);
+        this.searchedMovie = findMovie;
+        localStorage.setItem("setMovieData", JSON.stringify(findMovie));
+      });
     }
+  },
+  mounted() {
+    let data = JSON.parse(localStorage.getItem("setMovieData"));
+    this.apiData = data;
   }
-}
+};
 </script>
 
 <style scoped>
+.yell {
+  color: #ffc600;
+}
 
 .card {
   background: transparent;
 }
 
 img {
-  border: 1px solid #FFC600;
-  transition: .3s cubic-bezier(.5, 0, .1, 1) transform;
-	transition-delay: .15s;
+  border: 1px solid #ffc600;
+  transition: 0.3s cubic-bezier(0.5, 0, 0.1, 1) transform;
+  transition-delay: 0.15s;
 }
 
 img:hover {
@@ -93,13 +133,8 @@ img:hover {
   padding: 0.4rem;
 }
 
-input[type="text"] { 
+input[type="text"] {
   outline: none;
-}
-
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px #f3f3f3 inset;
-  -webkit-text-fill-color: #2c3e50 !important;
 }
 
 .form__button {
