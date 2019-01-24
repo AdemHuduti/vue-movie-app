@@ -22,24 +22,19 @@
 
 <script>
 export default {
-  
 };
 </script>
-
 <style scoped>
 a:link, a:visited {
   color: #fff;
 }
-
 a:hover {
   text-decoration: none;
 }
-
 .movies,
 .shows {
   cursor: pointer;
 }
-
 .center {
   position: absolute;
   top: 50%;
