@@ -3,14 +3,11 @@
     <router-link to="/TopRatedMovies">
       <i class="fas fa-backward fa-3x"></i>
     </router-link>
-
     <div class="row mt-5">
       <div class="col-md-4 text-center">
         <div class="bor-yellow" >
-          <!-- <div class="bgi" :style="{ 'background-image': 'url(' + 'https://image.tmdb.org/t/p/w300/' + item.backdrop_path + ')' }"></div> -->
           <h1>{{info.title}}</h1>
           <p>{{info.overview}}</p>
-          
         </div>
       </div>
 
@@ -38,7 +35,6 @@
         v-for="(rec, index) in recommendations" :key="index" 
         class="col-sm-6 col-md-4 mt-5 mb-4"
       >
-
         <div class="card">
           <img
             :src="`https://image.tmdb.org/t/p/w300${rec.backdrop_path}`"

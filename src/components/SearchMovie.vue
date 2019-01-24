@@ -2,7 +2,6 @@
   <div>
     <side-menu></side-menu>
     <h1 class="text-center">Search</h1>
-
     <form @submit.prevent>
       <div class="d-flex justify-content-center mt-5">
         <input
