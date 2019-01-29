@@ -13,7 +13,6 @@
         >
         <button @click="searchMovie" class="form__button">Search</button>
       </div>
-      <!-- <p class="text-center" v-if="searchName.length >= 3">traal</p> -->
     </form>
 
     <div class="row justify-content-center" v-if="searchedMovie.length">
@@ -148,6 +147,13 @@ input[type="text"] {
   font-weight: 500;
   margin-left: 0.7rem;
   cursor: pointer;
+  transition: .1s all ease-in-out;
+}
+
+.form__button:hover {
+  background-color: #fff000;
+  color: #000;
+  border: solid 2px #000;
 }
 
 .form__button:focus {

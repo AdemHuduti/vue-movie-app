@@ -150,6 +150,13 @@ input:-webkit-autofill {
   font-weight: 500;
   margin-left: 0.7rem;
   cursor: pointer;
+  transition: .1s all ease;
+}
+
+.form__button:hover {
+  background-color: #fff000;
+  color: #000;
+  border: solid 2px #000;
 }
 
 .form__button:focus {
