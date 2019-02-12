@@ -1,7 +1,5 @@
 # Movie application with Vue.js and Vuex
 
-> A Vue.js project
-
 ## Quick Start
 
 ``` bash
