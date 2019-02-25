@@ -58,7 +58,7 @@ img {
 }
 
 img:hover {
-  transform: scale(1.4);
+  transform: scale(1.2);
   border: none;
 }
 </style>

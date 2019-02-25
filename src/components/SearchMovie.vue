@@ -56,7 +56,7 @@
                 alt="imgz"
               >
             </router-link>
-            <h6 class="mb-3 mt-3">{{ movie.title }}</h6>
+            <h2 class="mb-3 mt-3">{{ movie.title }}</h2>
           </div>
         </div>
       </div>
@@ -116,7 +116,7 @@ img {
 }
 
 img:hover {
-  transform: scale(1.4);
+  transform: scale(1.2);
   border: none;
 }
 
