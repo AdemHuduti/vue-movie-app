@@ -106,6 +106,7 @@ export default {
 
 .card {
   background: transparent;
+  border: none;
 }
 
 img {
@@ -115,7 +116,7 @@ img {
 }
 
 img:hover {
-  transform: scale(1.2);
+  transform: scale(1.3);
   border: none;
 }
 

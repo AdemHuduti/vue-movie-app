@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <h1 v-if="recommendations.length">Recommended TV shows</h1>
+    <h1 v-if="recommendations.length" class="mt-5 mb-3">Recommended TV shows</h1>
     <div class="row" v-if="recommendations.length">
       <div 
         v-match-heights="{ el: ['.rec_title']}" 
