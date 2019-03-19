@@ -1,6 +1,10 @@
 <template>
   <div>
     <side-menu></side-menu>
+    <div class="page-loader" v-if="movieIsLoading">
+      <div class="loader">Loading...</div>
+    </div>
+
     <div class="row">
       <div class="col-md-12">
         <div class="container">
@@ -13,19 +17,16 @@
           v-match-heights="{ el: ['.c']}"
           v-for="(movie, index) in movies"
           :key="index"
-          class="col-sm-6 col-md-3 mt-5"
-        >
-          <div class="cad ml-4 parent">
-            <div class="c">
-              <router-link :to="{ path: '/movies/' + movie.id }">
-                <img
-                  :src="`https://image.tmdb.org/t/p/w300${movie.poster_path}`"
-                  class="card-img-top"
-                  alt="imgz"
-                >
-              </router-link>
-              <h5 class="mb-3 mt-3">{{ movie.title }}</h5>
-            </div>
+          class="col-sm-6 col-md-3 mt-5">
+          <div class="ml-4">
+            <router-link :to="{ path: '/movies/' + movie.id }">
+              <img
+                :src="`https://image.tmdb.org/t/p/w300${movie.poster_path}`"
+                class="card-img-top"
+                alt="imgz"
+              >
+            </router-link>
+            <h5 class="mb-3 mt-3">{{ movie.title }}</h5>
           </div>
         </div>
       </div>
@@ -41,7 +42,7 @@ export default {
     SideMenu
   },
   computed: {
-    ...mapState(["movies"])
+    ...mapState(["movies", "movieIsLoading"])
   },
   created() {
     this.$store.dispatch("getMovies");
@@ -83,5 +84,21 @@ img:hover {
   background-color: #222;
   padding: 2px 15px;
   border-radius: 50px;
+}
+
+.page-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+
+.loader {
+  position: relative;
+  top: 55%;
+  margin-top: 0;
 }
 </style>

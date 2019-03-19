@@ -1,6 +1,11 @@
 <template>
   <div>
     <side-menu></side-menu>
+
+    <div class="page-loader" v-if="showIsLoading">
+      <div class="loader">Loading...</div>
+    </div>
+
     <div class="row">
       <div class="col-md-12">
         <div class="container">
@@ -45,7 +50,7 @@ export default {
     this.$store.dispatch("getPopularShows");
   },
   computed: {
-    ...mapState(["topRatedTvShows"])
+    ...mapState(["topRatedTvShows", "showIsLoading"])
   }
 };
 </script>
@@ -60,5 +65,21 @@ img {
 img:hover {
   transform: scale(1.2);
   border: none;
+}
+
+.page-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+
+.loader {
+  position: relative;
+  top: 55%;
+  margin-top: 0;
 }
 </style>
