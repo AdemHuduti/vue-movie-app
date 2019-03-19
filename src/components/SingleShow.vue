@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="card-footer">
-            <span class="small float-left">Release Date: {{ moment(sim.release_date).format('DD.MM.YYYY') }}</span>
+            <span class="small float-left">Release Date: {{ moment(sim.first_air_date).format('DD.MM.YYYY') }}</span>
             <span class="small float-right text-warning">{{sim.vote_average}}</span>
           </div>
         </div>
