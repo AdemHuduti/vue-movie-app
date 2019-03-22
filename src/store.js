@@ -42,20 +42,27 @@ export default new Vuex.Store({
       })
     },
     getPopularMovies(context) {
+      context.commit("setMovieLoading", true);
       APIService.getPopularMovies().then(res => {
         context.commit("setPopularMovies", res.data.results.slice(0, 12))
+        context.commit("setMovieLoading", false);
       })
     },
     getUpcomingMovies(context) {
+      context.commit("setMovieLoading", true);
       APIService.getUpcomingMovies().then(res => {
         context.commit("setUpcomingMovies", res.data.results.slice(0, 12))
+        context.commit("setMovieLoading", false);
       })
     },
     getOnTvMovies(context) {
+      context.commit("setMovieLoading", true);
       APIService.getOnTvMovies().then(res => {
         context.commit("setOnTvMovies", res.data.results.slice(0, 12))
+        context.commit("setMovieLoading", false);
       })
     },
+    // TV SHOWS
     getTvShows(context) {
       context.commit("setShowsLoading", true);
       APIService.getTvShows().then(res => {

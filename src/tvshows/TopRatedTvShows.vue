@@ -1,6 +1,9 @@
 <template>
   <div>
     <side-menu></side-menu>
+    <div class="page-loader" v-if="setShowsLoading">
+      <div class="loader">Loading...</div>
+    </div>
 
     <div class="page-loader" v-if="showIsLoading">
       <div class="loader">Loading...</div>
@@ -47,7 +50,7 @@ export default {
     SideMenu
   },
   created() {
-    this.$store.dispatch("getPopularShows");
+    this.$store.dispatch("getPopularShows", "setShowsLoading");
   },
   computed: {
     ...mapState(["topRatedTvShows", "showIsLoading"])
