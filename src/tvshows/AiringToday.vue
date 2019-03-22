@@ -1,6 +1,9 @@
 <template>
   <div>
     <side-menu></side-menu>
+    <div class="page-loader" v-if="setShowsLoading">
+      <div class="loader">Loading...</div>
+    </div>
     <div class="row">
       <div class="col-md-12">
         <div class="container">
@@ -44,7 +47,7 @@ export default {
     this.$store.dispatch("getAiringTodayShows");
   },
   computed: {
-    ...mapState(["airingToday"])
+    ...mapState(["airingToday", "setShowsLoading"])
   }
 };
 </script>
