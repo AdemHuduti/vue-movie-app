@@ -50,10 +50,10 @@ export default {
     SideMenu
   },
   created() {
-    this.$store.dispatch("getPopularShows", "setShowsLoading");
+    this.$store.dispatch("getPopularShows");
   },
   computed: {
-    ...mapState(["topRatedTvShows", "showIsLoading"])
+    ...mapState(["topRatedTvShows", "showIsLoading", "setShowsLoading"])
   }
 };
 </script>

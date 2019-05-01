@@ -44,10 +44,10 @@ export default {
     SideMenu
   },
   created() {
-    this.$store.dispatch("getTvShows", "setShowsLoading");
+    this.$store.dispatch("getTvShows");
   },
   computed: {
-    ...mapState(["shows"])
+    ...mapState(["shows", "setShowsLoading"])
   }
 };
 </script>
